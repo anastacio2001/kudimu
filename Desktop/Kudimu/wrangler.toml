@@ -1,0 +1,19 @@
+name = "kudimu-worker"
+compatibility_date = "2025-10-14"
+main = "src/api.js"
+
+[[d1_databases]]
+binding = "kudimu_db"
+database_name = "kudimu-db"
+database_id = "23283061-d84d-48c3-bda5-43b1cc2ffc97"
+
+[[r2_buckets]]
+bucket_name = "kudimu-assets"
+binding = "kudimu_assets"
+
+[ai]
+binding = "kudimu_ai"
+model = "@cf/baai/bge-large-en-v1.5"
+compatibility_date = "2025-10-14"
+
+workers_dev = true

@@ -1,0 +1,51 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "kudimu-api",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-10-11",
+	"observability": {
+		"enabled": true
+	},
+	/**
+	 * D1 Database Binding
+	 */
+	"d1_databases": [
+		{
+			"binding": "kudimu_db",
+			"database_name": "kudimu-db",
+			"database_id": "23283061-d84d-48c3-bda5-43b1cc2ffc97"
+		}
+	],
+	/**
+	 * R2 Bucket Binding
+	 */
+	"r2_buckets": [
+		{
+			"binding": "kudimu_assets",
+			"bucket_name": "kudimu-assets"
+		}
+	],
+	/**
+	 * Workers AI Binding
+	 */
+	"ai": {
+		"binding": "kudimu_ai"
+	},
+	/**
+	 * Environment Variables
+	 */
+	"vars": {
+		"JWT_SECRET": "kudimu-secret-key-2025-prod-changeme"
+	},
+	"vectorize": [
+		{
+			"binding": "kudimu",
+			"index_name": "kudimu-embeddings",
+			"remote": true
+		}
+	]
+}

@@ -1,0 +1,27 @@
+# Cloudflare Pages Configuration
+
+# Build settings
+build:
+  command: npm run build
+  publish: dist
+  
+# Environment variables (set in Cloudflare Pages dashboard)
+# API_URL: https://kudimu-api.l-anastacio001.workers.dev
+
+# Node version
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirects and Headers
+[[redirects]]
+  from = "/api/*"
+  to = "https://kudimu-api.l-anastacio001.workers.dev/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
