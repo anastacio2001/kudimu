@@ -48,15 +48,18 @@ export default function ConfirmationScreen() {
         if (data.success) {
           setUserData(data.data);
           
+          // A API retorna pontos de reputação
+          const pontos = data.data.reputacao || data.data.pontos || 0;
+          
           // Verificar se houve mudança de nível
-          const newLevel = getReputationLevel(data.data.pontos);
+          const newLevel = getReputationLevel(pontos);
           if (oldLevel && newLevel.name !== oldLevel.name && newLevel.minPoints > oldLevel.minPoints) {
             // Level up! Mostrar notificação
-            setTimeout(() => showLevelUp(data.data.pontos), 2000);
+            setTimeout(() => showLevelUp(pontos), 2000);
           }
           
           // Atualizar localStorage
-          const updatedUser = { ...oldUser, reputacao: data.data.pontos, nivel: newLevel.name };
+          const updatedUser = { ...oldUser, reputacao: pontos, nivel: newLevel.name };
           localStorage.setItem('user', JSON.stringify(updatedUser));
         }
       }

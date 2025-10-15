@@ -38,11 +38,16 @@ export default function CampaignsScreen() {
         if (reputationResponse.ok) {
           const reputationData = await reputationResponse.json();
           if (reputationData.success) {
+            // A API agora retorna nivel como objeto {nome, cor, icone, beneficios}
+            const nivelNome = typeof reputationData.data.nivel === 'object' 
+              ? reputationData.data.nivel.nome 
+              : reputationData.data.nivel;
+            
             setUserData({
               ...user,
-              nivel: reputationData.data.nivel,
-              reputacao: reputationData.data.pontos,
-              saldo_pontos: user.saldo_pontos || 0
+              nivel: nivelNome,
+              reputacao: reputationData.data.reputacao || reputationData.data.pontos,
+              saldo_pontos: reputationData.data.estatisticas?.saldo_pontos || user.saldo_pontos || 0
             });
           } else {
             // Se não conseguir buscar reputação, usa dados do localStorage

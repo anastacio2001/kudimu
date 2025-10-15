@@ -55,8 +55,21 @@ export default function HistoryScreen() {
 
       if (reputationRes.ok) {
         const repData = await reputationRes.json();
-        setUserData(repData.data);
-        setReputationData(repData.data);
+        
+        // A API agora retorna nivel como objeto {nome, cor, icone, beneficios}
+        const nivelNome = typeof repData.data.nivel === 'object' 
+          ? repData.data.nivel.nome 
+          : repData.data.nivel;
+        
+        const normalizedData = {
+          ...repData.data,
+          nivel: nivelNome,
+          reputacao: repData.data.reputacao || repData.data.pontos || 0,
+          saldo_pontos: repData.data.estatisticas?.saldo_pontos || repData.data.saldo_pontos || 0
+        };
+        
+        setUserData(normalizedData);
+        setReputationData(normalizedData);
         
         // Fetch medals
         if (repData.data.usuario_id) {
