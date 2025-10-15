@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useNotifications } from '../components/NotificationToast';
+import { getReputationLevel } from '../components/ReputationBadge';
 import './ConfirmationScreen.css';
 
 const API_URL = 'https://kudimu-api.l-anastacio001.workers.dev';
@@ -9,6 +11,7 @@ export default function ConfirmationScreen() {
   const location = useLocation();
   const [userData, setUserData] = useState(null);
   const [showConfetti, setShowConfetti] = useState(true);
+  const { showLevelUp, showReward, NotificationContainer } = useNotifications();
 
   const { campaign, recompensa, pontos, validacao } = location.state || {};
 
@@ -18,11 +21,22 @@ export default function ConfirmationScreen() {
 
     // Esconder confetti após 3 segundos
     setTimeout(() => setShowConfetti(false), 3000);
+
+    // Mostrar notificação de recompensa
+    if (recompensa && validacao === 'aprovada') {
+      setTimeout(() => showReward(recompensa), 1000);
+    }
   }, []);
 
   const fetchUpdatedUserData = async () => {
     try {
       const token = localStorage.getItem('token');
+      
+      // Buscar dados antigos do localStorage para comparar nível
+      const oldUserStr = localStorage.getItem('user');
+      const oldUser = oldUserStr ? JSON.parse(oldUserStr) : null;
+      const oldLevel = oldUser ? getReputationLevel(oldUser.reputacao || 0) : null;
+
       const response = await fetch(`${API_URL}/reputation/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -33,6 +47,17 @@ export default function ConfirmationScreen() {
         const data = await response.json();
         if (data.success) {
           setUserData(data.data);
+          
+          // Verificar se houve mudança de nível
+          const newLevel = getReputationLevel(data.data.pontos);
+          if (oldLevel && newLevel.name !== oldLevel.name && newLevel.minPoints > oldLevel.minPoints) {
+            // Level up! Mostrar notificação
+            setTimeout(() => showLevelUp(data.data.pontos), 2000);
+          }
+          
+          // Atualizar localStorage
+          const updatedUser = { ...oldUser, reputacao: data.data.pontos, nivel: newLevel.name };
+          localStorage.setItem('user', JSON.stringify(updatedUser));
         }
       }
     } catch (err) {
@@ -202,7 +227,8 @@ export default function ConfirmationScreen() {
         </div>
       </div>
 
-      
+      {/* Container de Notificações */}
+      <NotificationContainer />
     </div>
   );
 }

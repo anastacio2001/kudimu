@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserProfileCard from '../components/UserProfileCard';
 import CampaignFilters from '../components/CampaignFilters';
+import RankingWidget from '../components/RankingWidget';
 import './CampaignsScreen.css';
 
 const API_URL = 'https://kudimu-api.l-anastacio001.workers.dev';
@@ -166,6 +167,8 @@ export default function CampaignsScreen() {
               onViewHistory={handleViewHistory}
             />
           )}
+          
+          <RankingWidget currentUserId={userData?.id} />
           
           <CampaignFilters 
             onFilterChange={handleFilterChange}
