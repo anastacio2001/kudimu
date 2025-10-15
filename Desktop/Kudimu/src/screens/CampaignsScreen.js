@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import UserProfileCard from '../components/UserProfileCard';
 import CampaignFilters from '../components/CampaignFilters';
 import RankingWidget from '../components/RankingWidget';
+import RecommendationBadge from '../components/RecommendationBadge';
+import { rankCampaigns } from '../utils/recommendations';
 import './CampaignsScreen.css';
 
 const API_URL = 'https://kudimu-api.l-anastacio001.workers.dev';
@@ -12,12 +14,15 @@ export default function CampaignsScreen() {
   const [campaigns, setCampaigns] = useState([]);
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
   const [userData, setUserData] = useState(null);
+  const [userHistory, setUserHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [sortBy, setSortBy] = useState('relevance'); // 'relevance', 'newest', 'reward'
 
   useEffect(() => {
     fetchUserData();
     fetchCampaigns();
+    fetchUserHistory();
   }, []);
 
   const fetchUserData = async () => {
@@ -64,6 +69,24 @@ export default function CampaignsScreen() {
       if (userStr) {
         setUserData(JSON.parse(userStr));
       }
+    }
+  };
+
+  const fetchUserHistory = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_URL}/answers/me`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setUserHistory(data.data || []);
+      }
+    } catch (err) {
+      console.error('Erro ao buscar histórico:', err);
     }
   };
 
@@ -128,8 +151,47 @@ export default function CampaignsScreen() {
       );
     }
 
-    setFilteredCampaigns(filtered);
+    // Aplicar ordenação
+    const sorted = applySorting(filtered);
+    setFilteredCampaigns(sorted);
   };
+
+  const applySorting = (campaignsList) => {
+    let sorted = [...campaignsList];
+
+    switch (sortBy) {
+      case 'relevance':
+        // Calcular score de relevância e ordenar
+        const userProfile = {
+          interesses: userData?.interesses,
+          localizacao: userData?.localizacao,
+          reputacao: userData?.reputacao
+        };
+        sorted = rankCampaigns(sorted, userProfile, userHistory);
+        break;
+      
+      case 'newest':
+        sorted.sort((a, b) => new Date(b.data_criacao) - new Date(a.data_criacao));
+        break;
+      
+      case 'reward':
+        sorted.sort((a, b) => b.recompensa - a.recompensa);
+        break;
+      
+      default:
+        break;
+    }
+
+    return sorted;
+  };
+
+  // Reaplicar ordenação quando mudar o critério
+  useEffect(() => {
+    if (filteredCampaigns.length > 0) {
+      const sorted = applySorting(filteredCampaigns);
+      setFilteredCampaigns(sorted);
+    }
+  }, [sortBy]);
 
   if (loading) {
     return (
@@ -183,6 +245,30 @@ export default function CampaignsScreen() {
 
         {/* Lista de campanhas */}
         <main className="campaigns-list">
+          {/* Controles de ordenação */}
+          <div className="campaigns-toolbar">
+            <div className="campaigns-count">
+              <span className="count-number">{filteredCampaigns.length}</span>
+              <span className="count-text">
+                {filteredCampaigns.length === 1 ? 'campanha disponível' : 'campanhas disponíveis'}
+              </span>
+            </div>
+            
+            <div className="sort-controls">
+              <label htmlFor="sort-select">Ordenar por:</label>
+              <select 
+                id="sort-select"
+                value={sortBy} 
+                onChange={(e) => setSortBy(e.target.value)}
+                className="sort-select"
+              >
+                <option value="relevance">🎯 Relevância</option>
+                <option value="newest">🆕 Mais Recentes</option>
+                <option value="reward">💰 Maior Recompensa</option>
+              </select>
+            </div>
+          </div>
+
           {filteredCampaigns.length === 0 ? (
             <div className="empty-state">
               <h3>Nenhuma campanha encontrada</h3>
@@ -200,6 +286,13 @@ export default function CampaignsScreen() {
 
                 return (
                   <div key={campaign.id} className="campaign-card">
+                    {/* Badge de recomendação no topo */}
+                    {campaign.relevanceScore >= 50 && (
+                      <div className="recommendation-badge-wrapper">
+                        <RecommendationBadge score={campaign.relevanceScore} size="small" />
+                      </div>
+                    )}
+                    
                     <div className="campaign-image">
                       <img 
                         src={campaign.imagem_url || 'https://via.placeholder.com/300x200?text=Campanha'} 
