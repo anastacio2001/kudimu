@@ -8,6 +8,7 @@ import QuestionnaireScreen from './screens/QuestionnaireScreen';
 import ConfirmationScreen from './screens/ConfirmationScreen';
 import HistoryScreen from './screens/HistoryScreen';
 import RewardsScreen from './screens/RewardsScreen';
+import ProfileSetupScreen from './screens/ProfileSetupScreen';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminUsers from './pages/AdminUsers';
 import AdminCampaigns from './pages/AdminCampaigns';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/confirmation" element={<ProtectedRoute><ConfirmationScreen /></ProtectedRoute>} />
         <Route path="/history" element={<ProtectedRoute><HistoryScreen /></ProtectedRoute>} />
         <Route path="/rewards" element={<ProtectedRoute><RewardsScreen /></ProtectedRoute>} />
+        <Route path="/profile/setup" element={<ProtectedRoute><ProfileSetupScreen /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
         <Route path="/admin/campaigns" element={<AdminRoute><AdminCampaigns /></AdminRoute>} />
