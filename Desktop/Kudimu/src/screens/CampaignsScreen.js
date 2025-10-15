@@ -226,9 +226,14 @@ export default function CampaignsScreen() {
             <h1>Campanhas Disponíveis</h1>
             <p>Participe de pesquisas e ganhe recompensas!</p>
           </div>
-          <button onClick={() => navigate('/reports')} className="btn-reports">
-            📊 Ver Relatórios
-          </button>
+          <div className="header-buttons">
+            <button onClick={() => navigate('/notifications')} className="btn-notifications">
+              🔔 Notificações
+            </button>
+            <button onClick={() => navigate('/reports')} className="btn-reports">
+              📊 Relatórios
+            </button>
+          </div>
         </div>
       </header>
 

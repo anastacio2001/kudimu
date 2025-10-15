@@ -34,6 +34,12 @@
   margin: 0;
 }
 
+.header-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-notifications,
 .btn-reports {
   padding: 0.75rem 1.5rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -45,6 +51,15 @@
   cursor: pointer;
   transition: all 0.3s;
   white-space: nowrap;
+}
+
+.btn-notifications {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.btn-notifications:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(240, 147, 251, 0.4);
 }
 
 .btn-reports:hover {
