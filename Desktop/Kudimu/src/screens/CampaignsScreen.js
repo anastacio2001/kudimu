@@ -106,3 +106,160 @@ export default function CampaignsScreen() {
         campaign.tema?.toLowerCase() === filters.tema.toLowerCase()
       );
     }
+
+    // Filtrar por reputação mínima
+    if (filters.reputacaoMinima) {
+      filtered = filtered.filter(campaign => {
+        const userReputation = userData?.reputacao || 0;
+        return userReputation >= campaign.reputacao_minima;
+      });
+    }
+
+    // Filtrar por recompensa mínima
+    if (filters.recompensaMinima) {
+      filtered = filtered.filter(campaign => 
+        campaign.recompensa >= parseFloat(filters.recompensaMinima)
+      );
+    }
+
+    setFilteredCampaigns(filtered);
+  };
+
+  if (loading) {
+    return (
+      <div className="campaigns-screen">
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Carregando campanhas...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="campaigns-screen">
+        <div className="error-container">
+          <h2>Erro</h2>
+          <p>{error}</p>
+          <button onClick={fetchCampaigns} className="retry-button">
+            Tentar Novamente
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="campaigns-screen">
+      <header className="campaigns-header">
+        <h1>Campanhas Disponíveis</h1>
+        <p>Participe de pesquisas e ganhe recompensas!</p>
+      </header>
+
+      <div className="campaigns-content">
+        {/* Sidebar com perfil e filtros */}
+        <aside className="sidebar">
+          {userData && (
+            <UserProfileCard 
+              userData={userData}
+              onViewHistory={handleViewHistory}
+            />
+          )}
+          
+          <CampaignFilters 
+            onFilterChange={handleFilterChange}
+            userReputation={userData?.reputacao || 0}
+          />
+        </aside>
+
+        {/* Lista de campanhas */}
+        <main className="campaigns-list">
+          {filteredCampaigns.length === 0 ? (
+            <div className="empty-state">
+              <h3>Nenhuma campanha encontrada</h3>
+              <p>Tente ajustar os filtros ou volte mais tarde para ver novas campanhas.</p>
+            </div>
+          ) : (
+            <div className="campaigns-grid">
+              {filteredCampaigns.map((campaign) => {
+                const userReputation = userData?.reputacao || 0;
+                const hasRequiredReputation = userReputation >= campaign.reputacao_minima;
+                const progressPercentage = getProgressPercentage(
+                  campaign.respostas_atuais,
+                  campaign.respostas_alvo
+                );
+
+                return (
+                  <div key={campaign.id} className="campaign-card">
+                    <div className="campaign-image">
+                      <img 
+                        src={campaign.imagem_url || 'https://via.placeholder.com/300x200?text=Campanha'} 
+                        alt={campaign.titulo}
+                      />
+                      {!hasRequiredReputation && (
+                        <div className="reputation-badge insufficient">
+                          Reputação insuficiente
+                        </div>
+                      )}
+                      {hasRequiredReputation && (
+                        <div className="reputation-badge sufficient">
+                          ✓ Você pode participar
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="campaign-content">
+                      <h3 className="campaign-title">{campaign.titulo}</h3>
+                      <p className="campaign-description">{campaign.descricao}</p>
+
+                      <div className="campaign-info">
+                        <div className="info-item">
+                          <span className="label">Tema:</span>
+                          <span className="value">{campaign.tema}</span>
+                        </div>
+                        <div className="info-item">
+                          <span className="label">Recompensa:</span>
+                          <span className="value reward">{campaign.recompensa} AOA</span>
+                        </div>
+                        <div className="info-item">
+                          <span className="label">Reputação mínima:</span>
+                          <span className="value">{campaign.reputacao_minima} pontos</span>
+                        </div>
+                        <div className="info-item">
+                          <span className="label">Duração:</span>
+                          <span className="value">~{campaign.duracao_estimada} min</span>
+                        </div>
+                      </div>
+
+                      <div className="campaign-progress">
+                        <div className="progress-info">
+                          <span>Progresso</span>
+                          <span>{campaign.respostas_atuais}/{campaign.respostas_alvo} respostas</span>
+                        </div>
+                        <div className="progress-bar">
+                          <div 
+                            className="progress-fill"
+                            style={{ width: `${progressPercentage}%` }}
+                          ></div>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => handleParticipar(campaign.id)}
+                        disabled={!hasRequiredReputation}
+                        className={`participate-button ${!hasRequiredReputation ? 'disabled' : ''}`}
+                      >
+                        {hasRequiredReputation ? 'Participar Agora' : 'Reputação Insuficiente'}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </main>
+      </div>
+    </div>
+  );
+}
