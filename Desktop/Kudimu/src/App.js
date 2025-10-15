@@ -14,7 +14,7 @@ import AdminUsers from './pages/AdminUsers';
 import AdminCampaigns from './pages/AdminCampaigns';
 import AdminAnswers from './pages/AdminAnswers';
 import AIInsights from './pages/AIInsights';
-import ReportsPage from './pages/ReportsPage';
+import ReportsPage from './screens/ReportsPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import './style.css';
@@ -34,6 +34,7 @@ function App() {
         <Route path="/history" element={<ProtectedRoute><HistoryScreen /></ProtectedRoute>} />
         <Route path="/rewards" element={<ProtectedRoute><RewardsScreen /></ProtectedRoute>} />
         <Route path="/profile/setup" element={<ProtectedRoute><ProfileSetupScreen /></ProtectedRoute>} />
+        <Route path="/reports" element={<ProtectedRoute><ReportsPage /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
         <Route path="/admin/campaigns" element={<AdminRoute><AdminCampaigns /></AdminRoute>} />

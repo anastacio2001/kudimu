@@ -221,8 +221,15 @@ export default function CampaignsScreen() {
   return (
     <div className="campaigns-screen">
       <header className="campaigns-header">
-        <h1>Campanhas Disponíveis</h1>
-        <p>Participe de pesquisas e ganhe recompensas!</p>
+        <div className="header-content">
+          <div>
+            <h1>Campanhas Disponíveis</h1>
+            <p>Participe de pesquisas e ganhe recompensas!</p>
+          </div>
+          <button onClick={() => navigate('/reports')} className="btn-reports">
+            📊 Ver Relatórios
+          </button>
+        </div>
       </header>
 
       <div className="campaigns-content">
