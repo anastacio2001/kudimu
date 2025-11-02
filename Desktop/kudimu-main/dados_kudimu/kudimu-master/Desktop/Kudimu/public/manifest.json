@@ -1,0 +1,60 @@
+{
+  "short_name": "Kudimu",
+  "name": "Kudimu Insights - Pesquisas de Mercado Angola",
+  "description": "Plataforma de pesquisas de mercado com recompensas para o público angolano",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "lang": "pt-AO",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "lifestyle"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Campanhas",
+      "short_name": "Campanhas",
+      "description": "Ver campanhas disponíveis",
+      "url": "/campaigns",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Histórico",
+      "short_name": "Histórico",
+      "description": "Ver histórico de respostas",
+      "url": "/history",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Recompensas",
+      "short_name": "Recompensas",
+      "description": "Gerenciar recompensas",
+      "url": "/rewards",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "gcm_sender_id": "103953800507"
+}

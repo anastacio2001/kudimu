@@ -1,0 +1,2 @@
+# kudimu
+projecto inovador

@@ -1,0 +1,83 @@
+.recommendation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 2px solid;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.recommendation-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.recommendation-badge:hover::before {
+  left: 100%;
+}
+
+.recommendation-badge.small {
+  padding: 4px 8px;
+  font-size: 11px;
+  gap: 4px;
+}
+
+.recommendation-badge.large {
+  padding: 8px 16px;
+  font-size: 15px;
+  gap: 10px;
+}
+
+.recommendation-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recommendation-score {
+  font-size: 0.9em;
+  opacity: 0.8;
+  font-weight: 700;
+}
+
+/* Animação de pulso para altamente recomendado */
+.recommendation-badge:has(.recommendation-text:contains('Altamente')) {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .recommendation-badge {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  
+  .recommendation-badge.small {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  
+  .recommendation-score {
+    display: none;
+  }
+}

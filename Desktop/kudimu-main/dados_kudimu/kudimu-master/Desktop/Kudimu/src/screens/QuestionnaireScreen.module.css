@@ -1,0 +1,77 @@
+/* Custom styles for QuestionnaireScreen components */
+
+/* Range Slider Customization */
+.slider {
+  background: linear-gradient(to right, #e5e7eb 0%, #e5e7eb 100%);
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.3);
+  transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #0284c7;
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+}
+
+.slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.3);
+  transition: all 0.2s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  background: #0284c7;
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+}
+
+/* Dark mode slider track */
+.dark .slider {
+  background: linear-gradient(to right, #374151 0%, #374151 100%);
+}
+
+/* Animation for question transitions */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.question-enter {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.question-exit {
+  animation: slideInLeft 0.3s ease-out;
+}
