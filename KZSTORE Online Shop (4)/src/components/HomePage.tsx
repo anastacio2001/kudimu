@@ -245,7 +245,7 @@ export function HomePage({
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="category-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
             {categories.map((category, index) => (
               <button
                 key={index}
@@ -301,11 +301,11 @@ export function HomePage({
               </Button>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {products.slice(0, 4).map((product, index) => (
                 <div
                   key={product.id}
-                  className="animate-slide-in-bottom"
+                  className="product-card animate-slide-in-bottom"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <ProductCard

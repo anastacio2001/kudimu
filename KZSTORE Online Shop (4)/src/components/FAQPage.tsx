@@ -104,17 +104,17 @@ export function FAQPage() {
     : faqs;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" style={{ backgroundColor: '#f9fafb', minHeight: '100vh' }}>
       {/* Hero Section */}
-      <div className="bg-gradient-primary text-white">
+      <div className="bg-gradient-primary text-white" style={{ background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <div className="inline-flex items-center justify-center size-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-            <HelpCircle className="size-10" />
+          <div className="inline-flex items-center justify-center size-20 rounded-full bg-white/20 backdrop-blur-sm mb-6" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+            <HelpCircle className="size-10" style={{ color: 'white' }} />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: 'white', fontWeight: 'bold' }}>
             Perguntas Frequentes
           </h1>
-          <p className="text-xl text-white/90 mb-8">
+          <p className="text-xl text-white/90 mb-8" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
             Encontre respostas para as dúvidas mais comuns
           </p>
 
@@ -133,13 +133,14 @@ export function FAQPage() {
       </div>
 
       {/* FAQ Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12" style={{ maxWidth: '896px', margin: '0 auto', padding: '3rem 1rem' }}>
         {/* Categories */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <div className="flex flex-wrap gap-3 mb-8" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem' }}>
           {categories.map(category => (
             <span
               key={category}
               className="px-4 py-2 bg-white rounded-lg border-2 border-gray-100 text-gray-700 font-semibold"
+              style={{ padding: '0.5rem 1rem', backgroundColor: 'white', borderRadius: '0.5rem', border: '2px solid #f3f4f6', color: '#374151', fontWeight: '600' }}
             >
               {category}
             </span>
@@ -147,10 +148,10 @@ export function FAQPage() {
         </div>
 
         {/* FAQ Items */}
-        <div className="space-y-4">
+        <div className="space-y-4" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {filteredFaqs.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-gray-600 text-lg">
+            <div className="text-center py-16" style={{ textAlign: 'center', padding: '4rem 0' }}>
+              <p className="text-gray-600 text-lg" style={{ color: '#4b5563', fontSize: '1.125rem' }}>
                 Nenhuma pergunta encontrada para "{searchQuery}"
               </p>
             </div>
@@ -159,32 +160,33 @@ export function FAQPage() {
               <div
                 key={index}
                 className="bg-white rounded-2xl border-2 border-gray-100 overflow-hidden transition-all hover:border-red-200 animate-slide-in-bottom"
-                style={{ animationDelay: `${index * 30}ms` }}
+                style={{ backgroundColor: 'white', borderRadius: '1rem', border: '2px solid #f3f4f6', overflow: 'hidden', animationDelay: `${index * 30}ms` }}
               >
                 <button
                   onClick={() => setExpandedId(expandedId === index ? null : index)}
                   className="w-full px-6 py-5 flex items-start justify-between gap-4 text-left hover:bg-gray-50 transition-all"
+                  style={{ width: '100%', padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', textAlign: 'left' }}
                 >
-                  <div className="flex-1">
-                    <span className="inline-block px-3 py-1 rounded-lg bg-red-50 text-red-700 text-xs font-semibold uppercase mb-2">
+                  <div className="flex-1" style={{ flex: '1' }}>
+                    <span className="inline-block px-3 py-1 rounded-lg bg-red-50 text-red-700 text-xs font-semibold uppercase mb-2" style={{ display: 'inline-block', padding: '0.25rem 0.75rem', borderRadius: '0.5rem', backgroundColor: '#fef2f2', color: '#b91c1c', fontSize: '0.75rem', fontWeight: '600', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                       {faq.category}
                     </span>
-                    <h3 className="font-bold text-gray-900 text-lg">
+                    <h3 className="font-bold text-gray-900 text-lg" style={{ fontWeight: 'bold', color: '#111827', fontSize: '1.125rem' }}>
                       {faq.question}
                     </h3>
                   </div>
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0" style={{ flexShrink: '0' }}>
                     {expandedId === index ? (
-                      <ChevronUp className="size-6 text-red-600" />
+                      <ChevronUp className="size-6 text-red-600" style={{ width: '1.5rem', height: '1.5rem', color: '#dc2626' }} />
                     ) : (
-                      <ChevronDown className="size-6 text-gray-400" />
+                      <ChevronDown className="size-6 text-gray-400" style={{ width: '1.5rem', height: '1.5rem', color: '#9ca3af' }} />
                     )}
                   </div>
                 </button>
 
                 {expandedId === index && (
-                  <div className="px-6 pb-6 animate-slide-down">
-                    <p className="text-gray-700 leading-relaxed">
+                  <div className="px-6 pb-6 animate-slide-down" style={{ padding: '0 1.5rem 1.5rem 1.5rem' }}>
+                    <p className="text-gray-700 leading-relaxed" style={{ color: '#374151', lineHeight: '1.75' }}>
                       {faq.answer}
                     </p>
                   </div>

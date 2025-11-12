@@ -53,22 +53,22 @@ export function CartPage({ cart, onUpdateQuantity, onRemoveItem, onCheckout, onC
           </Button>
           
           {/* Trust Badges */}
-          <div className="mt-12 grid grid-cols-3 gap-4">
+          <div className="mt-12 grid grid-cols-3 gap-2 sm:gap-4">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center size-12 rounded-xl bg-blue-100 text-blue-600 mb-2">
-                <Truck className="size-6" />
+              <div className="inline-flex items-center justify-center size-10 sm:size-12 rounded-xl bg-blue-100 text-blue-600 mb-2">
+                <Truck className="size-5 sm:size-6" />
               </div>
               <p className="text-xs text-gray-600">Entrega Rápida</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center size-12 rounded-xl bg-green-100 text-green-600 mb-2">
-                <Shield className="size-6" />
+              <div className="inline-flex items-center justify-center size-10 sm:size-12 rounded-xl bg-green-100 text-green-600 mb-2">
+                <Shield className="size-5 sm:size-6" />
               </div>
               <p className="text-xs text-gray-600">Compra Segura</p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center size-12 rounded-xl bg-yellow-100 text-yellow-600 mb-2">
-                <Gift className="size-6" />
+              <div className="inline-flex items-center justify-center size-10 sm:size-12 rounded-xl bg-yellow-100 text-yellow-600 mb-2">
+                <Gift className="size-5 sm:size-6" />
               </div>
               <p className="text-xs text-gray-600">Ofertas Especiais</p>
             </div>
@@ -82,13 +82,13 @@ export function CartPage({ cart, onUpdateQuantity, onRemoveItem, onCheckout, onC
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
                 Carrinho de Compras
               </h1>
-              <p className="text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600">
                 {cart.length} {cart.length === 1 ? 'produto' : 'produtos'} no carrinho
               </p>
             </div>

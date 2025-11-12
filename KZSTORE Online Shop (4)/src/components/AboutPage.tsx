@@ -59,15 +59,15 @@ export function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" style={{ backgroundColor: '#f9fafb' }}>
       {/* Hero Section */}
-      <div className="bg-gradient-primary text-white">
+      <div className="bg-gradient-primary text-white" style={{ background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-in-left">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-in-left" style={{ color: 'white', fontWeight: 'bold' }}>
               Sobre a KZSTORE
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed animate-slide-in-left" style={{ animationDelay: '100ms' }}>
+            <p className="text-xl md:text-2xl text-white/90 leading-relaxed animate-slide-in-left" style={{ animationDelay: '100ms', color: 'rgba(255, 255, 255, 0.9)' }}>
               Sua loja especializada em produtos eletrônicos de alta performance em Angola. 
               Conectando tecnologia e inovação para impulsionar negócios e residências.
             </p>
@@ -76,28 +76,28 @@ export function AboutPage() {
       </div>
 
       {/* Mission Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="animate-slide-in-left">
-            <div className="inline-flex items-center justify-center size-16 rounded-2xl bg-red-100 text-red-600 mb-6">
-              <Target className="size-8" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" style={{ padding: '4rem 0', maxWidth: '1280px', margin: '0 auto', paddingLeft: '1rem', paddingRight: '1rem' }}>
+        <div className="grid md:grid-cols-2 gap-12 items-center" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+          <div className="animate-slide-in-left" style={{ color: '#111827' }}>
+            <div className="inline-flex items-center justify-center size-16 rounded-2xl bg-red-100 text-red-600 mb-6" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '4rem', height: '4rem', borderRadius: '1rem', backgroundColor: '#fef2f2', color: '#dc2626', marginBottom: '1.5rem' }}>
+              <Target className="size-8" style={{ width: '2rem', height: '2rem' }} />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4" style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#111827', marginBottom: '1rem' }}>
               Nossa Missão
             </h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+            <p className="text-lg text-gray-700 leading-relaxed mb-6" style={{ fontSize: '1.125rem', color: '#374151', lineHeight: '1.75', marginBottom: '1.5rem' }}>
               Fornecer produtos eletrônicos de alta qualidade e performance técnica, 
               com atendimento especializado e entrega rápida, tornando a tecnologia 
               acessível para empresas e pessoas em Angola.
             </p>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed" style={{ color: '#374151', lineHeight: '1.75' }}>
               Acreditamos que tecnologia de qualidade não deve ser privilégio de poucos. 
               Por isso, trabalhamos com os melhores fornecedores internacionais para trazer 
               produtos originais com preços justos e suporte técnico diferenciado.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 animate-slide-in-right">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 animate-slide-in-right">
             {values.map((value, index) => (
               <div
                 key={index}
@@ -122,7 +122,7 @@ export function AboutPage() {
       {/* Stats Section */}
       <div className="bg-white py-16 border-y-2 border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             {stats.map((stat, index) => (
               <div
                 key={index}

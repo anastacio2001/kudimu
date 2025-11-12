@@ -256,15 +256,15 @@ export function ProductsPage({
                 onAction={clearFilters}
               />
             ) : (
-              <div className={
+              <div className={`product-grid ${
                 viewMode === 'grid'
                   ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
                   : 'space-y-4'
-              }>
+              }`}>
                 {filteredProducts.map((product, index) => (
                   <div
                     key={product.id}
-                    className="animate-slide-in-bottom"
+                    className="product-card animate-slide-in-bottom"
                     style={{ animationDelay: `${index * 30}ms` }}
                   >
                     <ProductCard

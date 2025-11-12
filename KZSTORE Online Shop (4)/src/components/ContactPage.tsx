@@ -86,25 +86,25 @@ export function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" style={{ backgroundColor: '#f9fafb', minHeight: '100vh' }}>
       {/* Hero Section */}
-      <div className="bg-gradient-primary text-white">
+      <div className="bg-gradient-primary text-white" style={{ background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: 'white', fontWeight: 'bold' }}>
             Entre em Contato
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
             Estamos aqui para ajudar! Fale conosco sobre produtos, pedidos ou qualquer dúvida
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" style={{ padding: '4rem 0', maxWidth: '1280px', margin: '0 auto', paddingLeft: '1rem', paddingRight: '1rem' }}>
+        <div className="grid lg:grid-cols-2 gap-12" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
           {/* Contact Form */}
-          <div className="animate-slide-in-left">
-            <div className="bg-white rounded-2xl border-2 border-gray-100 p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <div className="animate-slide-in-left" style={{ color: '#111827' }}>
+            <div className="bg-white rounded-2xl border-2 border-gray-100 p-8" style={{ backgroundColor: 'white', borderRadius: '1rem', border: '2px solid #f3f4f6', padding: '2rem' }}>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#111827', marginBottom: '1.5rem' }}>
                 Envie sua Mensagem
               </h2>
 
