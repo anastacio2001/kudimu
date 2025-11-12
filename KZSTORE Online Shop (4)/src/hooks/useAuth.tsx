@@ -96,19 +96,8 @@ export function useAuth() {
       });
 
       if (error) {
-        // Fallback para credenciais demo apenas se o usuário não existir no Supabase
-        if (email === 'admin@kzstore.ao' && password === 'kzstore2024') {
-          const demoUser: User = {
-            id: 'demo-admin',
-            email: 'admin@kzstore.ao',
-            role: 'admin',
-            name: 'Administrador Demo'
-          };
-          setUser(demoUser);
-          setIsAuthenticated(true);
-          localStorage.setItem('kzstore_demo_user', JSON.stringify(demoUser));
-          return;
-        }
+        // ⚠️ REMOVIDO: Fallback para credenciais demo por segurança
+        // O admin deve ser criado como usuário real no Supabase Auth
         
         throw new Error(error.message);
       }

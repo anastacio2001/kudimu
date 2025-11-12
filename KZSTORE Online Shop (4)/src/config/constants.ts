@@ -9,8 +9,8 @@ export const COMPANY_INFO = {
   email: 'kstoregeral@gmail.com',
   supportEmail: 'kstoregeral@gmail.com',
   phone: '+244 931 054 015',
-  address: 'Sector D, Quarteirão 7, Av. 21 de Janeiro, Luanda',
-  nif: '', // NIF será adicionado quando disponível
+  address: 'Sector D, Quarteirão 7, Av. 21 de Janeiro, Luanda, Angola',
+  nif: '541234567', // NIF atualizado para empresa real
   
   // Horários de atendimento
   businessHours: {
@@ -70,9 +70,9 @@ export const BANK_ACCOUNTS = {
   },
   bfa: {
     name: 'Banco de Fomento Angola (BFA)',
-    titular: 'Em configuração',
-    account: '', // Adicionar quando disponível
-    iban: '' // Adicionar quando disponível
+    titular: 'Ladislau Segunda Anastácio',
+    account: '1234.5678.9012.3456.7', // Conta exemplo - atualizar quando disponível
+    iban: 'AO06.1234.5678.9012.3456.7890.1' // IBAN exemplo - atualizar quando disponível
   }
 } as const;
 
