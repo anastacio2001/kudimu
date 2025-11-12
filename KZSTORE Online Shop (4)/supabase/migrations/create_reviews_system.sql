@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS reviews (
   rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
   title VARCHAR(255),
   comment TEXT,
-  verified_purchase BOOLEAN DEFAULT false,
+  is_verified_purchase BOOLEAN DEFAULT false,
+  is_approved BOOLEAN DEFAULT true,
   helpful_count INTEGER DEFAULT 0,
   images TEXT[], -- Array de URLs de imagens (opcional)
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -84,7 +85,7 @@ SELECT
   COUNT(CASE WHEN rating = 3 THEN 1 END) as three_star,
   COUNT(CASE WHEN rating = 2 THEN 1 END) as two_star,
   COUNT(CASE WHEN rating = 1 THEN 1 END) as one_star,
-  COUNT(CASE WHEN verified_purchase = true THEN 1 END) as verified_purchases
+  COUNT(CASE WHEN is_verified_purchase = true THEN 1 END) as verified_purchases
 FROM reviews
 GROUP BY product_id;
 

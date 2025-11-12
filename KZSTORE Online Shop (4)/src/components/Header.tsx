@@ -50,21 +50,21 @@ export function Header({ cartCount, wishlistCount = 0, onNavigate, onCategorySel
         </div>
 
         {/* Main Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-4">
+        <div className="flex items-center justify-between px-3 sm:px-6 py-3 gap-2">
           {/* Logo */}
           <button
             onClick={() => {
               onNavigate('home');
               setMobileMenuOpen(false);
             }}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2 group flex-shrink-0"
           >
-            <div className="flex items-center justify-center size-12 rounded-xl bg-gradient-primary shadow-lg group-hover:shadow-xl transition-all">
-              <Package className="size-6 text-white" strokeWidth={2.5} />
+            <div className="flex items-center justify-center size-10 sm:size-12 rounded-lg sm:rounded-xl bg-gradient-primary shadow-lg group-hover:shadow-xl transition-all">
+              <Package className="size-5 sm:size-6 text-white" strokeWidth={2.5} />
             </div>
-            <div className="hidden sm:flex flex-col items-start">
-              <span className="text-xl font-extrabold text-gradient leading-none">KZSTORE</span>
-              <span className="text-xs text-gray-500 font-medium">Tech & Electronics</span>
+            <div className="flex flex-col items-start">
+              <span className="text-base sm:text-xl font-extrabold text-gradient leading-none">KZSTORE</span>
+              <span className="hidden sm:block text-xs text-gray-500 font-medium">Tech & Electronics</span>
             </div>
           </button>
 
@@ -82,13 +82,13 @@ export function Header({ cartCount, wishlistCount = 0, onNavigate, onCategorySel
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             {/* Search Button - Desktop */}
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="hidden md:flex items-center justify-center size-10 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-red-600 transition-all"
+              className="hidden md:flex items-center justify-center size-9 sm:size-10 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-red-600 transition-all"
             >
-              <Search className="size-5" />
+              <Search className="size-4 sm:size-5" />
             </button>
 
             {/* User/Login Button */}
@@ -185,17 +185,33 @@ export function Header({ cartCount, wishlistCount = 0, onNavigate, onCategorySel
             </button>
 
             {/* Language Selector */}
-            <LanguageSelector />
+            <div className="hidden sm:block">
+              <LanguageSelector />
+            </div>
+
+            {/* Wishlist Button */}
+            <button
+              onClick={() => onNavigate('wishlist')}
+              className="relative flex items-center justify-center size-9 sm:size-10 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-red-600 transition-all"
+              title="Lista de Desejos"
+            >
+              <Heart className="size-4 sm:size-5" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-600 text-white text-xs font-bold shadow-md">
+                  {wishlistCount}
+                </span>
+              )}
+            </button>
 
             {/* Cart Button */}
             <button
               onClick={() => onNavigate('cart')}
-              className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-all shadow-md hover:shadow-lg"
+              className="relative flex items-center gap-2 px-2 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-all shadow-md hover:shadow-lg"
             >
-              <ShoppingCart className="size-5" />
+              <ShoppingCart className="size-4 sm:size-5" />
               <span className="hidden sm:inline font-medium">Carrinho</span>
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 flex items-center justify-center size-6 rounded-full bg-yellow-400 text-red-900 text-xs font-bold shadow-md animate-scale-in">
+                <span className="absolute -top-1 sm:-top-2 -right-1 sm:-right-2 flex items-center justify-center min-w-[1.25rem] sm:min-w-[1.5rem] h-5 sm:h-6 px-1 rounded-full bg-yellow-400 text-red-900 text-xs font-bold shadow-md animate-scale-in">
                   {cartCount}
                 </span>
               )}
