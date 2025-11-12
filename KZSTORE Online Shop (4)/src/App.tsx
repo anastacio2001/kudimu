@@ -53,6 +53,8 @@ export type Product = {
   imagem_url: string; // Imagem principal (primeira da lista)
   imagens?: string[]; // Array de URLs de imagens (inclui a principal)
   especificacoes?: Record<string, string>;
+  is_featured?: boolean; // Produto em destaque na homepage
+  featured_order?: number; // Ordem de exibição (maior = primeiro)
 };
 
 export type CartItem = {

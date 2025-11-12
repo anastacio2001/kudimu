@@ -302,7 +302,11 @@ export function HomePage({
             </div>
 
             <div className="product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-              {products.slice(0, 4).map((product, index) => (
+              {products
+                .filter(p => p.is_featured)
+                .sort((a, b) => (b.featured_order || 0) - (a.featured_order || 0))
+                .slice(0, 4)
+                .map((product, index) => (
                 <div
                   key={product.id}
                   className="product-card animate-slide-in-bottom"
@@ -318,6 +322,15 @@ export function HomePage({
                 </div>
               ))}
             </div>
+
+            {/* Mensagem se não houver produtos em destaque */}
+            {products.filter(p => p.is_featured).length === 0 && (
+              <div className="text-center py-12 bg-gray-50 rounded-xl">
+                <p className="text-gray-500">
+                  Nenhum produto em destaque no momento.
+                </p>
+              </div>
+            )}
           </div>
         </section>
       )}

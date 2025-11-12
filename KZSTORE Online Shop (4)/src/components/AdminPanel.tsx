@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, LayoutDashboard, Package, ShoppingCart, Users, Plus, Edit, Trash2, Megaphone, UserCog, LogOut, Zap, MessageCircle } from 'lucide-react';
+import { ArrowLeft, LayoutDashboard, Package, ShoppingCart, Users, Plus, Edit, Trash2, Megaphone, UserCog, LogOut, Zap, MessageCircle, Star } from 'lucide-react';
 import { Button } from './ui/button';
 import { useKZStore, setAuthToken } from '../hooks/useKZStore';
 import { useAuth } from '../hooks/useAuth';
@@ -93,6 +93,38 @@ export function AdminPanel({ onBack }: AdminPanelProps) {
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
     setShowProductForm(true);
+  };
+
+  const toggleFeaturedProduct = async (productId: string, currentFeatured: boolean) => {
+    try {
+      const { error } = await supabase
+        .from('products')
+        .update({ 
+          is_featured: !currentFeatured,
+          featured_order: !currentFeatured ? Date.now() : 0 // Usar timestamp como ordem
+        })
+        .eq('id', productId);
+
+      if (error) throw error;
+
+      // Recarregar produtos
+      await fetchProducts();
+      
+      showToast(
+        !currentFeatured 
+          ? 'Produto adicionado aos destaques!' 
+          : 'Produto removido dos destaques',
+        'success'
+      );
+    } catch (error) {
+      console.error('Error toggling featured:', error);
+      alert('Erro ao atualizar produto em destaque');
+    }
+  };
+
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+    // Toast simples com alert (pode implementar toast component depois)
+    console.log(`${type.toUpperCase()}: ${message}`);
   };
 
   const handleSyncUsers = async () => {
@@ -367,13 +399,14 @@ export function AdminPanel({ onBack }: AdminPanelProps) {
                     <th className="text-left px-6 py-3 text-sm text-gray-600">Categoria</th>
                     <th className="text-left px-6 py-3 text-sm text-gray-600">Preço (AOA)</th>
                     <th className="text-left px-6 py-3 text-sm text-gray-600">Estoque</th>
+                    <th className="text-center px-6 py-3 text-sm text-gray-600">Destaque</th>
                     <th className="text-right px-6 py-3 text-sm text-gray-600">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {products.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
+                      <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
                         Nenhum produto cadastrado. Clique em "Adicionar Produto" para começar.
                       </td>
                     </tr>
@@ -409,6 +442,21 @@ export function AdminPanel({ onBack }: AdminPanelProps) {
                           }`}>
                             {product.estoque}
                           </span>
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <button
+                            onClick={() => toggleFeaturedProduct(product.id, product.is_featured || false)}
+                            className={`p-2 rounded-lg transition-all ${
+                              product.is_featured
+                                ? 'bg-yellow-100 text-yellow-600 hover:bg-yellow-200'
+                                : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                            }`}
+                            title={product.is_featured ? 'Remover dos destaques' : 'Adicionar aos destaques'}
+                          >
+                            <Star 
+                              className={`size-5 ${product.is_featured ? 'fill-current' : ''}`}
+                            />
+                          </button>
                         </td>
                         <td className="px-6 py-4 text-sm text-right">
                           <div className="flex items-center justify-end gap-2">
