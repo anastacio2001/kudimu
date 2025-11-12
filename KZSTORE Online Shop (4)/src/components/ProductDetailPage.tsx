@@ -344,6 +344,29 @@ export function ProductDetailPage({ product, onAddToCart, onBack, userEmail, use
                 )}
               </div>
               
+              {/* Wishlist & Share Buttons */}
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  className="flex-1 px-8 py-4 rounded-xl border-2 text-base font-semibold hover:bg-gray-50 flex items-center justify-center gap-2"
+                  onClick={() => {
+                    // Add to wishlist logic
+                  }}
+                >
+                  <Heart className="size-5" />
+                  Adicionar aos Favoritos
+                </Button>
+                <Button
+                  variant="outline"
+                  className="px-8 py-4 rounded-xl border-2 text-base font-semibold hover:bg-blue-50 hover:border-blue-600 hover:text-blue-600 transition-all flex items-center justify-center gap-2"
+                  onClick={handleShare}
+                  title="Compartilhar produto"
+                >
+                  <Share2 className="size-5" />
+                  <span className="hidden sm:inline">Compartilhar</span>
+                </Button>
+              </div>
+              
               {/* Price Alert Button */}
               <PriceAlertButton
                 productId={product.id}

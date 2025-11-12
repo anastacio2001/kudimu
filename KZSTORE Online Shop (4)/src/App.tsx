@@ -27,6 +27,7 @@ import { GarantiaPage } from './components/GarantiaPage';
 import { MyOrdersPage } from './components/MyOrdersPage';
 import { MyAccountPage } from './components/MyAccountPage';
 import { MyTicketsPage } from './components/MyTicketsPage';
+import { AffiliatePanel } from './components/AffiliatePanel';
 import { SEO, seoConfigs } from './components/SEO';
 import { Analytics } from './components/Analytics';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -59,7 +60,7 @@ export type CartItem = {
   quantity: number;
 };
 
-type Page = 'home' | 'products' | 'product-detail' | 'cart' | 'checkout' | 'admin' | 'wishlist' | 'faq' | 'about' | 'contact' | 'login' | 'forgot-password' | 'reset-password' | 'privacy' | 'terms' | 'return' | 'cookie' | 'not-found' | 'promocoes' | 'blog' | 'carreiras' | 'devolucao' | 'garantia' | 'my-orders' | 'my-account' | 'my-tickets';
+type Page = 'home' | 'products' | 'product-detail' | 'cart' | 'checkout' | 'admin' | 'wishlist' | 'faq' | 'about' | 'contact' | 'login' | 'forgot-password' | 'reset-password' | 'privacy' | 'terms' | 'return' | 'cookie' | 'not-found' | 'promocoes' | 'blog' | 'carreiras' | 'devolucao' | 'garantia' | 'my-orders' | 'my-account' | 'my-tickets' | 'affiliate';
 
 type ToastMessage = {
   id: number;
@@ -459,6 +460,8 @@ export default function App() {
           {currentPage === 'my-account' && <MyAccountPage onBack={() => navigateTo('home')} />}
 
           {currentPage === 'my-tickets' && <MyTicketsPage onBack={() => navigateTo('home')} />}
+
+          {currentPage === 'affiliate' && <AffiliatePanel />}
         </main>
 
         {/* Footer - Hide on admin and login pages */}

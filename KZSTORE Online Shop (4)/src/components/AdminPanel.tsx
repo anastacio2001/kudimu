@@ -10,6 +10,7 @@ import { AdsManager } from './admin/AdsManager';
 import { TeamManager } from './admin/TeamManager';
 import { FlashSaleManager } from './admin/FlashSaleManager';
 import AdminTicketsPanel from './admin/AdminTicketsPanel';
+import { AffiliateManagement } from './admin/AffiliateManagement';
 import { Product } from '../App';
 import { createClient } from '@supabase/supabase-js';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
@@ -23,7 +24,7 @@ type AdminPanelProps = {
   onBack: () => void;
 };
 
-type Tab = 'dashboard' | 'products' | 'orders' | 'customers' | 'ads' | 'team' | 'flash-sales' | 'tickets';
+type Tab = 'dashboard' | 'products' | 'orders' | 'customers' | 'ads' | 'team' | 'flash-sales' | 'tickets' | 'affiliates';
 
 export function AdminPanel({ onBack }: AdminPanelProps) {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
@@ -317,6 +318,17 @@ export function AdminPanel({ onBack }: AdminPanelProps) {
               <MessageCircle className="inline-block mr-2 size-4" />
               Tickets
             </button>
+            <button
+              onClick={() => setActiveTab('affiliates')}
+              className={`pb-3 border-b-2 transition-colors whitespace-nowrap ${
+                activeTab === 'affiliates'
+                  ? 'border-[#E31E24] text-[#E31E24]'
+                  : 'border-transparent text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Users className="inline-block mr-2 size-4" />
+              Afiliados
+            </button>
           </div>
         </div>
       </div>
@@ -505,6 +517,13 @@ export function AdminPanel({ onBack }: AdminPanelProps) {
 
       {activeTab === 'tickets' && (
         <AdminTicketsPanel />
+      )}
+
+      {activeTab === 'affiliates' && (
+        <div>
+          <h2 className="text-2xl font-bold mb-6">Gestão de Afiliados</h2>
+          <AffiliateManagement />
+        </div>
       )}
 
       {/* Product Form Modal */}
