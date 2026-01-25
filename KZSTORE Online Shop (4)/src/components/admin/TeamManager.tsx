@@ -201,23 +201,16 @@ export function TeamManager() {
 
   const toggleMemberStatus = async (member: TeamMember) => {
     try {
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-d8a4dffd/team/${member.id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${publicAnonKey}`,
-          },
-          body: JSON.stringify({ ...member, ativo: !member.ativo }),
-        }
-      );
+      const { error } = await supabase
+        .from('team_members')
+        .update({ ativo: !member.ativo })
+        .eq('id', member.id);
 
-      if (response.ok) {
-        toast.success(member.ativo ? 'Membro desativado' : 'Membro ativado');
-        loadMembers();
-        loadStats();
-      }
+      if (error) throw error;
+
+      toast.success(member.ativo ? 'Membro desativado' : 'Membro ativado');
+      loadMembers();
+      loadStats();
     } catch (error) {
       console.error('Error toggling member status:', error);
       toast.error('Erro ao alterar status');

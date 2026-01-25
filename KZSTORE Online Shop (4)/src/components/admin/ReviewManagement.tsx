@@ -16,6 +16,7 @@ type Review = {
   is_approved: boolean;
   created_at: string;
   updated_at: string;
+  order_id?: string;
 };
 
 type ReviewManagementProps = {

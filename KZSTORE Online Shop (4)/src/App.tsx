@@ -422,7 +422,7 @@ export default function App() {
           {currentPage === 'admin' && (
             <>
               {isAuthenticated && isAdmin() ? (
-                <AdminPanel onLogout={handleLogout} />
+                <AdminPanel onBack={() => navigateTo('home')} />
               ) : (
                 <LoginPage
                   onLogin={handleLogin}
